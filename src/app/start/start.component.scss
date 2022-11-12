@@ -1,0 +1,63 @@
+.mat-drwaer-container {
+  height: 100vh;
+}
+
+.logo-container {
+  img {
+    height: 50px;
+  }
+  span {
+    padding-left: 12px;
+    font-size: 24px;
+    color: #4a5979;
+  }
+}
+
+.menu-icon {
+  cursor: pointer;
+}
+.sidenav {
+  width: 300px;
+}
+
+.logo-container {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 16px 0 16px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+}
+
+mat-toolbar,
+mat-toolbar-row {
+  min-height: 56px;
+  height: 56px;
+}
+
+.menu {
+  padding: 0;
+  margin: 0;
+  ul {
+    list-style-type: none;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 16px 0 16px;
+    cursor: pointer;
+
+    mat-icon {
+      margin-right: 16px;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+.router-container {
+  padding: 16px 56px 0 56px;
+}
