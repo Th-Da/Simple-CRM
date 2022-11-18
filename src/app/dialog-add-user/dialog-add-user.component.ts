@@ -11,7 +11,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class DialogAddUserComponent implements OnInit {
   user = new User();
   birthDate: Date;
-  loading = true;
+  loading = false;
 
   constructor(
     private firestore: AngularFirestore,
@@ -27,7 +27,6 @@ export class DialogAddUserComponent implements OnInit {
       .add(Object.assign({}, this.user))
       .then((result: any) => {
         this.loading = false;
-        console.log(result);
         this.dialogRef.close();
       });
   }
