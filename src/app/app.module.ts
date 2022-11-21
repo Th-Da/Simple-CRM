@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -28,6 +29,9 @@ import { StartComponent } from './start/start.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
 import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { DialogOpenAdressComponent } from './dialog-open-adress/dialog-open-adress.component';
+import { DialogOpenUserComponent } from './dialog-open-user/dialog-open-user.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,9 @@ import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.compon
     DashboardComponent,
     UserComponent,
     DialogAddUserComponent,
+    UserDetailComponent,
+    DialogOpenAdressComponent,
+    DialogOpenUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +62,7 @@ import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.compon
     FormsModule,
     MatProgressBarModule,
     MatCardModule,
+    MatMenuModule,
 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

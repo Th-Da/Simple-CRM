@@ -1,0 +1,30 @@
+.user-header {
+  min-height: 300px;
+  background-color: #e64a19;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+
+  img {
+    height: 80px;
+    border-radius: 100%;
+    margin-right: 16px;
+  }
+
+  .user-detail {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.button-more {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}

@@ -26,7 +26,6 @@ export class UserComponent implements OnInit {
       .valueChanges({ idField: 'id' })
       .subscribe((changes: any) => {
         this.allUsers = changes;
-        console.log('chanes are ', changes);
       });
   }
 
