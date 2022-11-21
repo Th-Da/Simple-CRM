@@ -24,6 +24,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { StartComponent } from './start/start.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -32,6 +34,9 @@ import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.compon
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DialogOpenAdressComponent } from './dialog-open-adress/dialog-open-adress.component';
 import { DialogOpenUserComponent } from './dialog-open-user/dialog-open-user.component';
+import { LoginStartComponent } from './loginComponents/login-start/login-start.component';
+import { SignInComponent } from './loginComponents/sign-in/sign-in.component';
+import { SignUpComponent } from './loginComponents/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -43,11 +48,16 @@ import { DialogOpenUserComponent } from './dialog-open-user/dialog-open-user.com
     UserDetailComponent,
     DialogOpenAdressComponent,
     DialogOpenUserComponent,
+    LoginStartComponent,
+    SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,

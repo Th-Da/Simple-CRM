@@ -16,18 +16,6 @@
       <mat-label>Email Adress</mat-label>
       <input [disabled]="loading" [(ngModel)]="user.email" matInput />
     </mat-form-field>
-    <mat-form-field class="wdt-44" appearance="outline">
-      <mat-label>Birth Date</mat-label>
-      <input
-        [disabled]="loading"
-        [(ngModel)]="birthDate"
-        matInput
-        [matDatepicker]="picker"
-      />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
   </div>
   <div class="dialog-buttons">
     <button

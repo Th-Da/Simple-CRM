@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/models/user.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-open-adress',
@@ -12,35 +11,22 @@ import { ActivatedRoute } from '@angular/router';
 export class DialogOpenAdressComponent implements OnInit {
   user: User;
   userId: string;
-  loading = false;
+  loading = true;
   constructor(
     private firestore: AngularFirestore,
-    public dialogRef: MatDialogRef<DialogOpenAdressComponent>,
-    private route: ActivatedRoute
+    public dialogRef: MatDialogRef<DialogOpenAdressComponent>
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.userId);
-
-    this.route.paramMap.subscribe((paramMap) => {
-      this.userId = paramMap.get('id');
-    });
-  }
+  ngOnInit(): void {}
   saveUser() {
-    try {
-      this.firestore
-        .collection('users')
-        .doc(this.userId)
-        .update(Object.assign({}, this.user));
-    } catch (error) {
-      error;
-    }
-
-    console.log(this.userId);
-    /*       .then((result: any) => {
+    this.loading = true;
+    this.firestore
+      .collection('users')
+      .doc(this.userId)
+      .update(Object.assign({}, this.user))
+      .then(() => {
         this.loading = false;
         this.dialogRef.close();
-        
-      }); */
+      });
   }
 }

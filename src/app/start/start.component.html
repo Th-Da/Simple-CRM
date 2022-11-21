@@ -6,11 +6,18 @@
     </div>
 
     <ul class="menu">
-      <li routerLink="/" routerLinkActive="router-link-active">
+      <li routerLink="start/dashboard" routerLinkActive="router-link-active">
         <mat-icon>fact_check</mat-icon> Dashboard
       </li>
-      <li routerLink="/user" routerLinkActive="router-link-active">
+      <li routerLink="start/user" routerLinkActive="router-link-active">
         <mat-icon>perm_identity</mat-icon>User
+      </li>
+      <li
+        routerLink="/login"
+        routerLinkActive="router-link-active"
+        class="mt-32"
+      >
+        <mat-icon>logout</mat-icon>Logout
       </li>
     </ul>
   </mat-drawer>
@@ -26,7 +33,6 @@
           mat-button
           fontIcon="menu"
           (click)="drawer.toggle()"
-          routerLink=""
         >
         </mat-icon>
         <span>Simple CRM</span>

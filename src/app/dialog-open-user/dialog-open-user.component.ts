@@ -22,12 +22,12 @@ export class DialogOpenUserComponent implements OnInit {
   ngOnInit(): void {}
 
   saveUser() {
-    this.user.birtDate = this.birthDate.getTime();
+    this.loading = true;
     this.firestore
       .collection('users')
       .doc(this.userId)
       .update(Object.assign({}, this.user))
-      .then((result: any) => {
+      .then(() => {
         this.loading = false;
         this.dialogRef.close();
       });
