@@ -9,6 +9,9 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SignInComponent } from './loginComponents/sign-in/sign-in.component';
 import { SignUpComponent } from './loginComponents/sign-up/sign-up.component';
 
+// route guard
+import { AuthGuard } from './shared/guard/auth.guard';
+
 const routes: Routes = [
   /*   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
@@ -33,19 +36,17 @@ const routes: Routes = [
   { path: 'user/:id', component: UserDetailComponent, outlet: 'loggedInUser' },
  */
 
-  {
-    path: 'home',
-    component: HomeComponent,
-    children: [
-      { path: 'home/sign-up', component: SignUpComponent },
-      { path: 'home/sing-in', component: SignInComponent },
-    ],
-  },
-
   { path: 'user', component: UserComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'user/:id', component: UserDetailComponent },
-  { path: '**', component: DashboardComponent },
+
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'sign-in', component: SignInComponent },
+  { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
 ];
 
 @NgModule({

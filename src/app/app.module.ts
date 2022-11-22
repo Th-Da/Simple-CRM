@@ -19,6 +19,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 
+// AngularFire
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -26,6 +27,9 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
+//Auth service
+import { AuthService } from './services/auth.service';
 
 import { StartComponent } from './start/start.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -39,6 +43,8 @@ import { SignInComponent } from './loginComponents/sign-in/sign-in.component';
 import { SignUpComponent } from './loginComponents/sign-up/sign-up.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ForgotPasswordComponent } from './loginComponents/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './loginComponents/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +61,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     SignUpComponent,
     SidenavComponent,
     ToolbarComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +90,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
