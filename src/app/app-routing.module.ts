@@ -36,17 +36,20 @@ const routes: Routes = [
   { path: 'user/:id', component: UserDetailComponent, outlet: 'loggedInUser' },
  */
 
-  { path: 'user', component: UserComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'user/:id', component: UserDetailComponent },
-
   {
     path: 'home',
     component: HomeComponent,
+    children: [
+      { path: 'sign-up', component: SignUpComponent },
+      { path: 'sign-in', component: SignInComponent },
+      { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
+    ],
   },
-  { path: 'sign-up', component: SignUpComponent },
-  { path: 'sign-in', component: SignInComponent },
-  { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
+
+  { path: 'user', component: UserComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'user/:id', component: UserDetailComponent },
+  /*   { path: '**', component: DashboardComponent }, */
 ];
 
 @NgModule({
