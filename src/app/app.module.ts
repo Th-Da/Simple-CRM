@@ -34,9 +34,11 @@ import { DialogAddUserComponent } from './dialog-add-user/dialog-add-user.compon
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { DialogOpenAdressComponent } from './dialog-open-adress/dialog-open-adress.component';
 import { DialogOpenUserComponent } from './dialog-open-user/dialog-open-user.component';
-import { LoginStartComponent } from './loginComponents/login-start/login-start.component';
+import { HomeComponent } from './loginComponents/home/home.component';
 import { SignInComponent } from './loginComponents/sign-in/sign-in.component';
 import { SignUpComponent } from './loginComponents/sign-up/sign-up.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -48,9 +50,11 @@ import { SignUpComponent } from './loginComponents/sign-up/sign-up.component';
     UserDetailComponent,
     DialogOpenAdressComponent,
     DialogOpenUserComponent,
-    LoginStartComponent,
+    HomeComponent,
     SignInComponent,
     SignUpComponent,
+    SidenavComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,14 +6,15 @@
     </div>
 
     <ul class="menu">
-      <li routerLink="start/dashboard" routerLinkActive="router-link-active">
+      <li routerLink="dashboard" routerLinkActive="router-link-active">
         <mat-icon>fact_check</mat-icon> Dashboard
       </li>
-      <li routerLink="start/user" routerLinkActive="router-link-active">
+      <li routerLink="/user" routerLinkActive="router-link-active">
         <mat-icon>perm_identity</mat-icon>User
       </li>
       <li
-        routerLink="/login"
+        (click)="logout()"
+        routerLink="home/sign-in"
         routerLinkActive="router-link-active"
         class="mt-32"
       >

@@ -1,2 +1,3 @@
-<app-start></app-start>
+<app-start *ngIf="isLoggedIn"></app-start>
+<app-home *ngIf="!isLoggedIn"></app-home>
 <!-- footer -->

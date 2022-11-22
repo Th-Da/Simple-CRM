@@ -4,12 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { StartComponent } from './start/start.component';
 import { UserComponent } from './user/user.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './loginComponents/home/home.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { LoginStartComponent } from './loginComponents/login-start/login-start.component';
 import { SignInComponent } from './loginComponents/sign-in/sign-in.component';
 import { SignUpComponent } from './loginComponents/sign-up/sign-up.component';
 
 const routes: Routes = [
+  /*   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginStartComponent,
@@ -18,16 +19,33 @@ const routes: Routes = [
       { path: 'singin', component: SignInComponent },
     ],
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  { path: 'user', component: UserComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'user/:id', component: UserDetailComponent }, */
+
+  /*   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
+  { path: 'sign-in', component: SignInComponent },
+  { path: 'sign-up', component: SignUpComponent },
+
+  { path: 'dashboard', component: StartComponent },
+  { path: 'user', component: UserComponent, outlet: 'loggedInUser' },
+  { path: 'user/:id', component: UserDetailComponent, outlet: 'loggedInUser' },
+ */
+
   {
-    path: 'start',
-    component: StartComponent,
+    path: 'home',
+    component: HomeComponent,
     children: [
-      { path: 'user', component: UserComponent },
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'user/:id', component: UserDetailComponent },
+      { path: 'home/sign-up', component: SignUpComponent },
+      { path: 'home/sing-in', component: SignInComponent },
     ],
   },
+
+  { path: 'user', component: UserComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'user/:id', component: UserDetailComponent },
+  { path: '**', component: DashboardComponent },
 ];
 
 @NgModule({
