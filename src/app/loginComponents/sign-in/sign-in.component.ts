@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VariableService } from 'src/app/services/variable.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -7,7 +8,13 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    private readonly _serv: VariableService
+  ) {}
 
   ngOnInit(): void {}
+  public get isLoggedIn() {
+    return this._serv.isLoggedIn;
+  }
 }

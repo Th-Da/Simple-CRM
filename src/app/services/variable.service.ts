@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class VariableService {
-  public isLoggedIn = true;
+  public isLoggedIn = false;
 
   constructor() {}
 }
