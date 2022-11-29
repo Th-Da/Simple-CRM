@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 import { VariableService } from './services/variable.service';
 
 @Component({
@@ -9,9 +10,12 @@ import { VariableService } from './services/variable.service';
 export class AppComponent {
   title = 'simple-crm';
 
-  public get isLoggedIn() {
+  /*  isLoggedIn() {
     return this._serv.isLoggedIn;
-  }
+  } */
 
-  constructor(private readonly _serv: VariableService) {}
+  constructor(
+    private readonly _serv: VariableService,
+    public auth: AuthService
+  ) {}
 }

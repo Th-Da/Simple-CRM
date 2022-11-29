@@ -14,7 +14,7 @@ export class SignUpComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-  public get isLoggedIn() {
+  /*   public get isLoggedIn() {
     return this._serv.isLoggedIn;
-  }
+  } */
 }

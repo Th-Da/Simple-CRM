@@ -33,13 +33,15 @@ export class AuthService {
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
+    console.log('success');
+
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['start/dashboard']);
           }
         });
       })
@@ -88,7 +90,7 @@ export class AuthService {
   // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['start/dashboard']);
     });
   }
   // Auth logic to run auth providers
@@ -96,7 +98,7 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['start/dashboard']);
         this.SetUserData(result.user);
       })
       .catch((error) => {

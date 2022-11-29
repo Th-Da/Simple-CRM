@@ -45,6 +45,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ForgotPasswordComponent } from './loginComponents/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './loginComponents/verify-email/verify-email.component';
+import { AuthGuard } from './shared/auth.guard';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,7 @@ import { VerifyEmailComponent } from './loginComponents/verify-email/verify-emai
     provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

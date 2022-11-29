@@ -12,7 +12,7 @@ import { ForgotPasswordComponent } from './loginComponents/forgot-password/forgo
 import { VerifyEmailComponent } from './loginComponents/verify-email/verify-email.component';
 
 // route guard
-import { AuthGuard } from './shared/guard/auth.guard';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
@@ -21,10 +21,25 @@ const routes: Routes = [
   { path: 'verify-email-address', component: VerifyEmailComponent },
   { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
 
-  { path: 'user', component: UserComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'user/:id', component: UserDetailComponent },
-  { path: '', redirectTo: 'dasboard', pathMatch: 'full' },
+  {
+    path: 'start',
+    component: StartComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'user/:id',
+        component: UserDetailComponent,
+        canActivate: [AuthGuard],
+      },
+      { path: '', redirectTo: 'dasboard', pathMatch: 'full' },
+    ],
+  },
 
   /*  { path: '**', component: HomeComponent }, */
 ];
