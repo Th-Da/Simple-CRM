@@ -12,12 +12,7 @@
       <li routerLink="user" routerLinkActive="router-link-active">
         <mat-icon>perm_identity</mat-icon>User
       </li>
-      <li
-        (click)="afAuth.SignOut()"
-        routerLink="sign-in"
-        routerLinkActive="router-link-active"
-        class="mt-32"
-      >
+      <li (click)="afAuth.SignOut()" class="mt-32">
         <mat-icon>logout</mat-icon>Logout
       </li>
     </ul>

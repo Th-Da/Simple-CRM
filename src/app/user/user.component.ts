@@ -32,4 +32,8 @@ export class UserComponent implements OnInit {
   openDialog() {
     this.dialog.open(DialogAddUserComponent);
   }
+
+  openUser(url, id) {
+    this.router.navigate([url]);
+  }
 }

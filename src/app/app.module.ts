@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -46,6 +46,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ForgotPasswordComponent } from './loginComponents/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './loginComponents/verify-email/verify-email.component';
 import { AuthGuard } from './shared/auth.guard';
+import { DialogAuthErrorsComponent } from './dialog-auth-errors/dialog-auth-errors.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { AuthGuard } from './shared/auth.guard';
     ToolbarComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
+    DialogAuthErrorsComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +85,7 @@ import { AuthGuard } from './shared/auth.guard';
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
+    ReactiveFormsModule,
     MatProgressBarModule,
     MatCardModule,
     MatMenuModule,

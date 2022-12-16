@@ -2,60 +2,72 @@
   <div class="displayTableCell">
     <div class="authBlock">
       <h3>Sign In</h3>
-      <div class="formGroup">
-        <input
-          type="text"
-          class="formControl"
-          placeholder="Username"
-          #userName
-          required
-        />
-      </div>
-      <div class="formGroup">
-        <input
-          type="password"
-          class="formControl"
-          placeholder="Password"
-          #userPassword
-          required
-        />
-      </div>
-      <!-- Calling SignIn Api from AuthService -->
-      <div class="formGroup">
-        <input
-          type="button"
-          class="btn btnPrimary"
-          value="Log in"
-          (click)="authService.SignIn(userName.value, userPassword.value)"
-        />
-      </div>
-      <div class="formGroup">
-        <span class="or"><span class="orInner">Or</span></span>
-      </div>
-      <!-- Calling GoogleAuth Api from AuthService -->
-      <div class="formGroup">
-        <button
-          type="button"
-          class="btn googleBtn"
-          (click)="authService.GoogleAuth()"
-        >
-          <i class="fab fa-google-plus-g"></i>
-          Log in with Google
-        </button>
-      </div>
-      <div class="forgotPassword">
-        <span routerLink="/forgot-password">Forgot Password?</span>
-      </div>
-    </div>
-    <div class="redirectToLogin">
-      <span
-        >Don't have an account?<span
-          class="redirect"
-          routerLink="/register-user"
-        >
-          Sign Up</span
-        ></span
+      <form
+        type=""
+        [formGroup]="contactForm"
+        (submit)="onSubmit(this.userEmail.value, this.userPassword.value)"
+        ngNativeValidate
       >
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              class="width-25vw"
+              autocomplete="off"
+              type="email"
+              matInput
+              #userEmail
+              placeholder="Email"
+              formControlName="email"
+            />
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="width-25vw">
+            <mat-label>Password</mat-label>
+            <input
+              autocomplete="off"
+              type="password"
+              matInput
+              #userPassword
+              placeholder="Password"
+              formControlName="password"
+            />
+          </mat-form-field>
+        </p>
+
+        <button class="width-25vw" mat-raised-button color="login-button">
+          Login
+        </button>
+        <div class="formGroup">
+          <span class="or"><span class="orInner">Or</span></span>
+        </div>
+        <!-- Calling GoogleAuth Api from AuthService -->
+        <div class="formGroup">
+          <button
+            type="button"
+            class="btn googleBtn"
+            (click)="authService.GoogleAuth()"
+          >
+            <i class="fab fa-google-plus-g"></i>
+            Log in with Google
+          </button>
+        </div>
+        <div class="forgotPassword">
+          <span routerLink="/forgot-password">Forgot Password?</span>
+        </div>
+      </form>
+      >
+      <div class="redirectToLogin">
+        <span
+          >Don't have an account?<span
+            class="redirect"
+            routerLink="/register-user"
+          >
+            Sign Up</span
+          ></span
+        >
+      </div>
     </div>
   </div>
 </div>

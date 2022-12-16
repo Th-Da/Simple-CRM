@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { VariableService } from 'src/app/services/variable.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,8 +14,27 @@ export class SignInComponent implements OnInit {
     private readonly _serv: VariableService
   ) {}
 
+  contactForm = new FormGroup({
+    password: new FormControl('', Validators.required),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+    ]),
+  });
+
   ngOnInit(): void {}
   /*   public isLoggedIn() {
     return !this._serv.isLoggedIn;
   } */
+
+  /**
+   * checks if the form is valid befor signing in
+   *  @param userEmail value from intputfield email
+   * @param userPassword value from intputfield password
+   */
+  onSubmit(userEmail, userPassword) {
+    if (this.contactForm.valid) {
+      this.authService.SignIn(userEmail, userPassword);
+    }
+  }
 }

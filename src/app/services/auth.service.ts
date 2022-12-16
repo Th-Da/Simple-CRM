@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, Injector, NgZone } from '@angular/core';
 import { User } from '../services/user';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -7,16 +7,26 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAuthErrorsComponent } from '../dialog-auth-errors/dialog-auth-errors.component';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
+  authErrorIcon: string = 'info';
+  authErrorHeadline: string = '';
+  authErrorUserMessage: string = '';
+  authErrorMessage: string = '';
+  authErrorCode: any = '';
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private dialog: MatDialog,
+    private injector: Injector
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -33,15 +43,27 @@ export class AuthService {
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
-    console.log('success');
-
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
-          if (user) {
+          // If user has verified his email, but the page is not reloaded, the login does not work
+          if (user && user.emailVerified && this.router.url == '/sign-in') {
+            this.router.navigate(['start/dashboard']).then(() => {
+              window.location.reload();
+            });
+            console.log('success');
+          } else if (user && user.emailVerified) {
             this.router.navigate(['start/dashboard']);
+          } else {
+            this.displayAuthErrorDialog(
+              'report',
+              'Attention',
+              'Please verify your email!',
+              'null',
+              'null'
+            );
           }
         });
       })
@@ -90,7 +112,9 @@ export class AuthService {
   // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['start/dashboard']);
+      setTimeout(() => {
+        this.router.navigate(['start/dashboard']);
+      }, 1000);
     });
   }
   // Auth logic to run auth providers
@@ -127,7 +151,39 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['/sign-in']).then(() => {
+        window.location.reload();
+      });
     });
+  }
+
+  /**
+   * Opens the error dialog with passed icon and messages
+   * @param errorIcon info || warning
+   * @param authErrorHeadline Info || Attention
+   * @param errorUserMessage A message readable by the user
+   * @param errorMessage The message from the error
+   * @param errorCode The error code
+   */
+  displayAuthErrorDialog(
+    errorIcon: string,
+    authErrorHeadline: string,
+    errorUserMessage: string,
+    errorMessage: string,
+    errorCode: string
+  ) {
+    this.authErrorIcon = errorIcon;
+    this.authErrorHeadline = authErrorHeadline;
+    this.authErrorUserMessage = errorUserMessage;
+    this.authErrorMessage = errorMessage;
+    this.authErrorCode = errorCode;
+    this.openAuthErrorDialog();
+  }
+
+  /**
+   * Opens the authentication error dialog and shows the user the corresponding errors
+   */
+  openAuthErrorDialog() {
+    this.dialog.open(DialogAuthErrorsComponent);
   }
 }
