@@ -1,4 +1,18 @@
-<div class="component-wrapper">
+<video
+  autoplay
+  [muted]="true"
+  loop
+  src="assets/images/start-video.mp4"
+  type="video/mp4"
+></video>
+<div class="heading">
+  <div class="heading-text">
+    <h1>Welcome to Simple CRM</h1>
+    <h2>Make use of an easy CRM tool for small businesses</h2>
+    <button (click)="scroll('target')">Go for it!</button>
+  </div>
+</div>
+<div class="component-wrapper" id="target">
   <mat-card>
     <h1>Sign In</h1>
     <div>
@@ -41,8 +55,8 @@
         </div>
       </form>
       <div class="options">
-        <span routerLink="/forgot-password">Forgot Password?</span>
-        <span>Don't have an account?</span>
+        <a routerLink="/forgot-password">Forgot Password?</a>
+        <a routerLink="/sign-up">Don't have an account?</a>
       </div>
     </div>
     <div class="google-container">

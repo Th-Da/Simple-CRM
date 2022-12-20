@@ -1,5 +1,8 @@
+import { ViewportScroller } from '@angular/common';
+import { Target } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { VariableService } from 'src/app/services/variable.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -11,7 +14,8 @@ import { AuthService } from '../../services/auth.service';
 export class SignInComponent implements OnInit {
   constructor(
     public authService: AuthService,
-    private readonly _serv: VariableService
+    private readonly _serv: VariableService,
+    private viewportScroller: ViewportScroller
   ) {}
 
   contactForm = new FormGroup({
@@ -36,5 +40,9 @@ export class SignInComponent implements OnInit {
     if (this.contactForm.valid) {
       this.authService.SignIn(userEmail, userPassword);
     }
+  }
+
+  scroll(target: string) {
+    this.viewportScroller.scrollToAnchor(target);
   }
 }
