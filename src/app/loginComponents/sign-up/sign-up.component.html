@@ -1,53 +1,62 @@
-<div class="displayTable">
-  <div class="displayTableCell">
-    <div class="authBlock">
-      <h3>Sign Up</h3>
-      <div class="formGroup">
-        <input
-          type="email"
-          class="formControl"
-          placeholder="Email Address"
-          #userEmail
-          required
-        />
+<div class="component-wrapper">
+  <mat-card>
+    <h1>Sign Up</h1>
+    <form
+      type=""
+      [formGroup]=""
+      (click)="authService.SignUp(userEmail.value, userPassword.value)"
+      ngNativeValidate
+    >
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            class="width-25vw"
+            autocomplete="off"
+            type="email"
+            matInput
+            #userEmail
+            placeholder="Email"
+            formControlName="email"
+          />
+        </mat-form-field>
       </div>
-      <div class="formGroup">
+
+      <mat-form-field appearance="outline" class="width-25vw">
+        <mat-label>Password</mat-label>
         <input
+          autocomplete="off"
           type="password"
-          class="formControl"
+          matInput
+          #userPassword
           placeholder="Password"
-          #userPwd
-          required
+          formControlName="password"
         />
-      </div>
-      <div class="formGroup">
-        <input
-          type="button"
-          class="btn btnPrimary"
-          value="Sign Up"
-          (click)="authService.SignUp(userEmail.value, userPwd.value)"
-        />
-      </div>
-      <div class="formGroup">
-        <span class="or"><span class="orInner">Or</span></span>
-      </div>
+      </mat-form-field>
+
+      <button mat-raised-button color="login-button">Login</button>
+    </form>
+    <div class="google-container">
+      <span class="orInner">Or</span>
+
       <!-- Continue with Google -->
       <div class="formGroup">
         <button
           type="button"
-          class="btn googleBtn"
+          class="width-25vw google-login"
+          mat-stroked-button
+          id="googleLogin"
           (click)="authService.GoogleAuth()"
         >
-          <i class="fab fa-google-plus-g"></i>
+          <img class="google-icon" src="assets/images/googleicon.png" alt="" />
           Continue with Google
         </button>
       </div>
-    </div>
-    <div class="redirectToLogin">
+
       <span
         >Already have an account?
-        <span class="redirect" routerLink="/sign-in">Log In</span></span
+        <span class="redirect" routerLink="/sign-in"><a>Log In</a></span></span
       >
     </div>
-  </div>
+  </mat-card>
 </div>
