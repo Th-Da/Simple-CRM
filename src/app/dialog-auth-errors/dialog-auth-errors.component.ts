@@ -7,11 +7,9 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './dialog-auth-errors.component.html',
   styleUrls: ['./dialog-auth-errors.component.scss'],
 })
-export class DialogAuthErrorsComponent implements OnInit {
+export class DialogAuthErrorsComponent {
   constructor(
     public authService: AuthService,
     public dialogRef: MatDialogRef<DialogAuthErrorsComponent>
   ) {}
-
-  ngOnInit(): void {}
 }

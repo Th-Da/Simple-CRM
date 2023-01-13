@@ -82,7 +82,13 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.displayAuthErrorDialog(
+          'report',
+          'Attention',
+          'An error has occurred.',
+          error.message,
+          error.code
+        );
       });
   }
   // Send email verfificaiton when new user sign up
