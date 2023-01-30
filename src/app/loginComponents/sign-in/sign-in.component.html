@@ -1,83 +1,52 @@
-<video
-  autoplay
-  [muted]="true"
-  loop
-  src="assets/images/start-video.mp4"
-  type="video/mp4"
-></video>
+<video autoplay [muted]="true" loop src="assets/images/start-video.mp4" type="video/mp4"></video>
 <div class="heading">
-  <div class="heading-text">
-    <h1>Welcome to Simple CRM</h1>
-    <h2>Make use of an easy CRM tool for small businesses</h2>
-    <button mat-raised-button color="login-button" (click)="scroll('target')">
+    <div class="heading-text">
+        <h1>Welcome to Simple CRM</h1>
+        <h2>Make use of an easy CRM tool for small businesses</h2>
+        <button mat-raised-button color="login-button" (click)="scroll('target')">
       Go for it!
     </button>
-  </div>
+    </div>
 </div>
 <div class="component-wrapper" id="target">
-  <mat-card>
-    <h1>Sign In</h1>
-    <div>
-      <form
-        type=""
-        [formGroup]="contactForm"
-        (submit)="onSubmit(this.userEmail.value, this.userPassword.value)"
-        ngNativeValidate
-      >
+    <mat-card>
+        <h1>Sign In</h1>
         <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input
-              class="width-25vw"
-              autocomplete="off"
-              type="email"
-              matInput
-              #userEmail
-              placeholder="Email"
-              formControlName="email"
-            />
-          </mat-form-field>
-        </div>
+            <form type="" [formGroup]="contactForm" (ngSubmit)="onSubmit(this.userEmail.value, this.userPassword.value)" ngNativeValidate>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input class="width-25vw" autocomplete="off" type="email" matInput #userEmail placeholder="Email" formControlName="email" />
+                    </mat-form-field>
+                </div>
 
-        <mat-form-field appearance="outline" class="width-25vw">
-          <mat-label>Password</mat-label>
-          <input
-            autocomplete="off"
-            type="password"
-            matInput
-            #userPassword
-            placeholder="Password"
-            formControlName="password"
-          />
-        </mat-form-field>
+                <mat-form-field appearance="outline" class="width-25vw">
+                    <mat-label>Password</mat-label>
+                    <input autocomplete="off" type="password" matInput #userPassword placeholder="Password" formControlName="password" />
+                </mat-form-field>
 
-        <div class="buttons">
-          <button mat-raised-button color="login-button">Login</button>
-          <button mat-raised-button color="login-button">Login as guest</button>
+                <div class="buttons">
+                    <button mat-raised-button color="login-button">Login</button>
+                    <button mat-raised-button color="login-button" #guestLogin>Login as guest</button>
+                </div>
+            </form>
+            <div class="options">
+                <a routerLink="/forgot-password">Forgot Password?</a>
+                <a routerLink="/sign-up">Don't have an account?</a>
+            </div>
         </div>
-      </form>
-      <div class="options">
-        <a routerLink="/forgot-password">Forgot Password?</a>
-        <a routerLink="/sign-up">Don't have an account?</a>
-      </div>
-    </div>
-    <div class="google-container">
-      <span class="orInner">Or</span>
-      <!-- Calling GoogleAuth Api from AuthService -->
-      <div class="formGroup">
-        <button
-          (click)="this.authService.GoogleAuth()"
-          class="width-25vw google-login"
-          mat-stroked-button
-          id="googleLogin"
-        >
+        <div class="google-container">
+            <span class="orInner">Or</span>
+            <!-- Calling GoogleAuth Api from AuthService -->
+            <div class="formGroup">
+                <button (click)="this.authService.GoogleAuth()" class="width-25vw google-login" mat-stroked-button id="googleLogin">
           <img
             class="google-icon"
             src="assets/images/googleicon.png"
             alt=""
           />Login with google account
         </button>
-      </div>
-    </div>
-  </mat-card>
+            </div>
+        </div>
+    </mat-card>
 </div>

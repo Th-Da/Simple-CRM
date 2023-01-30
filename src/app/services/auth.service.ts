@@ -13,6 +13,7 @@ import { DialogAuthErrorsComponent } from '../dialog-auth-errors/dialog-auth-err
   providedIn: 'root',
 })
 export class AuthService {
+  guestLogin: boolean = false;
   userData: any; // Save logged in user data
   authErrorIcon: string = 'info';
   authErrorHeadline: string = '';
@@ -43,10 +44,11 @@ export class AuthService {
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
+    debugger;
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.SetUserData(result.user);
+        this.setUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           // If user has verified his email, but the page is not reloaded, the login does not work
           if (user && user.emailVerified && this.router.url == '/sign-in') {
@@ -68,7 +70,13 @@ export class AuthService {
         });
       })
       .catch((error) => {
-        window.alert(error.message);
+        this.displayAuthErrorDialog(
+          'report',
+          'Attention',
+          'An error has occurred.',
+          error.message,
+          error.code
+        );
       });
   }
   // Sign up with email/password
@@ -79,7 +87,7 @@ export class AuthService {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
-        this.SetUserData(result.user);
+        this.setUserData(result.user);
       })
       .catch((error) => {
         this.displayAuthErrorDialog(
@@ -104,16 +112,30 @@ export class AuthService {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        this.displayAuthErrorDialog(
+          'info',
+          'Info',
+          'Password reset email sent, check your inbox.',
+          'null',
+          'null'
+        );
       })
       .catch((error) => {
-        window.alert(error);
+        this.displayAuthErrorDialog(
+          'report',
+          'Attention',
+          'An error has occurred.',
+          error.message,
+          error.code
+        );
       });
   }
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
+    return user !== null && this.checkEmailVerification() !== false
+      ? true
+      : false;
   }
   // Sign in with Google
   GoogleAuth() {
@@ -129,16 +151,40 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.router.navigate(['start/dashboard']);
-        this.SetUserData(result.user);
+        this.setUserData(result.user);
       })
       .catch((error) => {
         window.alert(error);
       });
   }
+
+  loginAsGuest() {
+    this.guestLogin = true;
+    this.afAuth
+      .signInAnonymously()
+      .then((result) => {
+        this.setUserData(result.user);
+        console.log(result.user);
+
+        this.afAuth.onAuthStateChanged(() => {
+          this.router.navigate(['start/dashboard']);
+        });
+      })
+      .catch((error) => {
+        this.displayAuthErrorDialog(
+          'report',
+          'Attention',
+          'An error has occurred.',
+          error.message,
+          error.code
+        );
+      });
+  }
+
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user: any) {
+  setUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -161,6 +207,18 @@ export class AuthService {
         window.location.reload();
       });
     });
+  }
+
+  checkEmailVerification() {
+    const user = JSON.parse(localStorage.getItem('user')!);
+
+    if (this.guestLogin) {
+      return true;
+    } else if (user.emailVerified) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
