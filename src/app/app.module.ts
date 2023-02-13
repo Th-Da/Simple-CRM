@@ -9,7 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -89,12 +89,12 @@ import { DialogAuthErrorsComponent } from './dialog-auth-errors/dialog-auth-erro
     MatProgressBarModule,
     MatCardModule,
     MatMenuModule,
-
+    AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebase),
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, { provide: MatDialogRef, useValue: {} }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

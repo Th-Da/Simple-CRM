@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
+import { FirestoreService } from '../services/firestore.service';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -12,16 +13,20 @@ export class DialogAddUserComponent implements OnInit {
   user = new User();
   birthDate: Date;
   loading = false;
+  uid: string = '';
 
   constructor(
     private firestore: AngularFirestore,
-    public dialogRef: MatDialogRef<DialogAddUserComponent>
+    public dialogRef: MatDialogRef<DialogAddUserComponent>,
+    public firestoreService: FirestoreService
   ) {}
 
   ngOnInit(): void {}
 
   saveUser() {
+    debugger;
     this.user.birtDate = this.birthDate.getTime();
+    this.user.photoURL = this.firestoreService.updatedUser.photoURL;
     this.firestore
       .collection('users')
       .add(Object.assign({}, this.user))

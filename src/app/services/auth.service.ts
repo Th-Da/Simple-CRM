@@ -44,7 +44,6 @@ export class AuthService {
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
-    debugger;
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {

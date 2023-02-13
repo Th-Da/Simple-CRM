@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/models/user.class';
 import { DialogOpenAdressComponent } from '../dialog-open-adress/dialog-open-adress.component';
 import { DialogOpenUserComponent } from '../dialog-open-user/dialog-open-user.component';
+import { FirestoreService } from '../services/firestore.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -18,7 +19,8 @@ export class UserDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public firestoreService: FirestoreService
   ) {}
 
   ngOnInit(): void {

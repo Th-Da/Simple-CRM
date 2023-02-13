@@ -20,7 +20,6 @@ import { AuthService } from '../../services/auth.service';
 export class SignInComponent implements OnInit {
   @HostListener('document:click', ['$event'])
   documentClick(event: Event): void {
-    debugger;
     this.isGuestButtonClicked(event);
   }
   @ViewChild('guestLogin', { read: ElementRef }) guestLogin: ElementRef;

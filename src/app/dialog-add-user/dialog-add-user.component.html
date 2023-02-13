@@ -1,60 +1,55 @@
 <h1 mat-dialog-title>Add User</h1>
 <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 <ol>
-  <div class="add-user-dialog">
-    <mat-form-field class="mr-16" appearance="outline">
-      <mat-label>First Name</mat-label>
-      <input [disabled]="loading" [(ngModel)]="user.firstName" matInput />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Last Name</mat-label>
-      <input [disabled]="loading" [(ngModel)]="user.lastName" matInput />
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="mr-16" appearance="outline">
-      <mat-label>Email Adress</mat-label>
-      <input [disabled]="loading" [(ngModel)]="user.email" matInput />
-    </mat-form-field>
-    <mat-form-field class="wdt-44" appearance="outline">
-      <mat-label>Birth Date</mat-label>
-      <input
-        [disabled]="loading"
-        [(ngModel)]="birthDate"
-        matInput
-        [matDatepicker]="picker"
-      />
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
-  <div class="wdt-92">
-    <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Street, House No.</mat-label>
-      <input [disabled]="loading" [(ngModel)]="user.street" matInput />
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field class="mr-16" appearance="outline">
-      <mat-label>Zip code</mat-label>
-      <input [disabled]="loading" [(ngModel)]="user.zipCode" matInput />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>City</mat-label>
-      <input [disabled]="loading" [(ngModel)]="user.city" matInput />
-    </mat-form-field>
-  </div>
+    <div class="add-user-dialog">
+        <mat-form-field class="mr-16" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input [disabled]="loading" [(ngModel)]="user.firstName" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input [disabled]="loading" [(ngModel)]="user.lastName" matInput />
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field class="mr-16" appearance="outline">
+            <mat-label>Email Adress</mat-label>
+            <input [disabled]="loading" [(ngModel)]="user.email" matInput />
+        </mat-form-field>
+        <mat-form-field class="wdt-44" appearance="outline">
+            <mat-label>Birth Date</mat-label>
+            <input [disabled]="loading" [(ngModel)]="birthDate" matInput [matDatepicker]="picker" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="">
+        <mat-form-field class="mr-16" appearance="outline">
+            <mat-label>Street, House No.</mat-label>
+            <input [disabled]="loading" [(ngModel)]="user.street" matInput />
+        </mat-form-field>
+        <mat-form-field class="" appearance="outline">
+            <mat-label>Zip code</mat-label>
+            <input [disabled]="loading" [(ngModel)]="user.zipCode" matInput />
+        </mat-form-field>
+    </div>
+    <div>
 
-  <div class="dialog-buttons">
-    <button
-      [disabled]="loading"
-      (click)="saveUser()"
-      class="mr-16"
-      mat-raised-button
-    >
+        <div>
+            <mat-form-field class="mr-16" appearance="outline">
+                <mat-label>City</mat-label>
+                <input [disabled]="loading" [(ngModel)]="user.city" matInput />
+            </mat-form-field>
+            <input #inputField hidden type="file" [(ngModel)]="user.photoURL" (change)="this.firestoreService.uploadImage($event)">
+            <button mat-raised-button color="primary" (click)="inputField.click()">Upload a profile image</button>
+        </div>
+
+        <div class="dialog-buttons">
+            <button [disabled]="loading" (click)="saveUser()" class="mr-16" mat-raised-button>
       Save
     </button>
-    <button mat-raised-button (click)="dialogRef.close()">Cancel</button>
-  </div>
+            <button mat-raised-button (click)="dialogRef.close()">Cancel</button>
+        </div>
+    </div>
 </ol>
