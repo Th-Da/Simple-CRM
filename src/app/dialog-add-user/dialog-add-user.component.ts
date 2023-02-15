@@ -24,7 +24,6 @@ export class DialogAddUserComponent implements OnInit {
   ngOnInit(): void {}
 
   saveUser() {
-    debugger;
     this.user.birtDate = this.birthDate.getTime();
     this.user.photoURL = this.firestoreService.updatedUser.photoURL;
     this.firestore
