@@ -1,15 +1,26 @@
 <mat-card class="user-header">
+
     <button class="button-more" [matMenuTriggerFor]="profilMenu" mat-icon-button>
     <mat-icon>more_vert</mat-icon>
   </button>
     <mat-menu #profilMenu>
         <button mat-menu-item (click)="editProfil()">Edit</button>
     </mat-menu>
-    <img src="{{user.photoURL}}" alt="" />
-    <div class="user-detail">
-        <h2>{{ user.firstName }} {{ user.lastName }}</h2>
-        <p>{{ user.email }}</p>
+
+    <div class="img-container">
+        <div class="img-blurr-container">
+            <img src="{{user.photoURL}}" alt="" />
+            <input #inputField hidden type="file" [(ngModel)]="user.photoURL" (change)="this.firestoreService.updateUserImage($event)">
+            <button class="button-img-upload" (click)="inputField.click()" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        </div>
+        <div class="user-detail">
+            <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+            <p>{{ user.email }}</p>
+        </div>
     </div>
+
 </mat-card>
 
 <mat-card class="mt-32">

@@ -3,7 +3,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { MatDialogRef } from '@angular/material/dialog';
-import { finalize, Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, finalize, Observable } from 'rxjs';
 import { User } from 'src/models/user.class';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { AuthService } from './auth.service';
@@ -17,7 +18,8 @@ export class FirestoreService {
     public dialogRef: MatDialogRef<DialogAddUserComponent>,
     public storage: AngularFireStorage,
     private injector: Injector,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private route: ActivatedRoute
   ) {}
 
   user = new User();
@@ -26,16 +28,21 @@ export class FirestoreService {
   loading = false;
   downloadURL: Observable<string>;
   userDataObject: User;
+  allUsers = [];
 
-  saveUser() {
-    this.user.birtDate = this.birthDate.getTime();
+  getUser() {
     this.firestore
       .collection('users')
-      .add(Object.assign({}, this.user))
-      .then((result: any) => {
-        this.loading = false;
-        this.dialogRef.close();
+      .valueChanges({ idField: 'id' })
+      .subscribe((changes: any) => {
+        this.allUsers = changes;
       });
+  }
+
+  updateUserImage(event) {
+    const currentUser = () => this.route.parent.snapshot.url[4].path;
+    console.log(currentUser);
+    this.uploadImage(event);
   }
 
   uploadImage(event) {
@@ -43,7 +50,7 @@ export class FirestoreService {
     const filePath = 'images/' + file.name;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
-
+    debugger;
     task
       .snapshotChanges()
       .pipe(

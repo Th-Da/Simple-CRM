@@ -4,22 +4,36 @@
   color: white;
   display: flex;
   align-items: flex-end;
+}
 
-  img {
-    height: 80px;
-    border-radius: 100%;
-    margin-right: 16px;
+.img-container {
+  display: flex;
+  .button-img-upload {
+    margin-bottom: 80px;
   }
-
-  .user-detail {
-    height: 80px;
+  .img-blurr-container {
+    height: 85px;
+    width: 85px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    h2 {
-      margin-bottom: 0;
+    color: #b72c01;
+    border-radius: 50%;
+    box-shadow: -2px -1px 3px 3px;
+    align-items: center;
+    img {
+      height: 80px;
+      border-radius: 100%;
     }
+  }
+}
+
+.user-detail {
+  height: 80px;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h2 {
+    margin-bottom: 0;
   }
 }
 
